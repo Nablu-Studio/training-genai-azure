@@ -1,0 +1,10 @@
+{
+  "gpt-4o-mini": {
+    "capacity": "shared",
+    "cost": "medium"
+  },
+  "gpt-4.1": {
+    "capacity": "reserved",
+    "cost": "high"
+  }
+}

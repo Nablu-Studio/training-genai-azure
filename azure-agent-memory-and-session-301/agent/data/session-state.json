@@ -1,0 +1,16 @@
+{
+  "sessionId": "azure-session-001",
+  "goal": "Reprendre une conversation et proposer la prochaine action.",
+  "constraints": [
+    "Réponse concise",
+    "Pas de données sensibles"
+  ],
+  "lastDecision": {
+    "choice": "Utiliser un modèle plus petit pour réduire le coût",
+    "rationale": "Le cas d’usage tolère une qualité légèrement inférieure."
+  },
+  "notes": [
+    "La mémoire durable doit être courte",
+    "Le rapport doit être vérifiable"
+  ]
+}

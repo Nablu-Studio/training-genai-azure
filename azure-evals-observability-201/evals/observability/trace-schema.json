@@ -1,0 +1,7 @@
+{
+  "fields": [
+    "latencyMs",
+    "deployment",
+    "promptHash"
+  ]
+}

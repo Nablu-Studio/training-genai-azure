@@ -1,0 +1,22 @@
+{
+  "policyId": "runtime-policy-azure-001",
+  "rules": [
+    {
+      "id": "no-secrets",
+      "description": "Interdire les secrets dans les prompts et sorties.",
+      "enforcement": "block"
+    },
+    {
+      "id": "no-external-urls",
+      "description": "Interdire les URLs externes non approuvées.",
+      "enforcement": "review"
+    }
+  ],
+  "exceptions": [
+    {
+      "ruleId": "no-external-urls",
+      "reason": "Accès à une console officielle",
+      "scope": "console-links"
+    }
+  ]
+}

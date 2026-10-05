@@ -1,0 +1,20 @@
+[
+  {
+    "id": "doc-1",
+    "title": "Role de l index",
+    "content": "Azure AI Search sert de couche de retrieval : seuls les champs declares searchable peuvent etre retrouves par une requete.",
+    "source": "guide-interne"
+  },
+  {
+    "id": "doc-2",
+    "title": "Reponse ancree",
+    "content": "Une reponse ancree cite ses sources par identifiant et ne contient rien qui ne figure dans les passages fournis.",
+    "source": "guide-interne"
+  },
+  {
+    "id": "doc-3",
+    "title": "Fraicheur",
+    "content": "La fraicheur des reponses depend de la frequence d indexation, pas du modele de generation.",
+    "source": "runbook-exploitation"
+  }
+]

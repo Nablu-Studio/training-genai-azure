@@ -1,0 +1,18 @@
+{
+  "workflowId": "azure-workflow-001",
+  "goal": "Produire une réponse structurée et proposer une prochaine action.",
+  "steps": [
+    {
+      "id": "summarize",
+      "intent": "Synthétiser l’objectif et les contraintes",
+      "input": "objectif + contraintes",
+      "output": "résumé"
+    },
+    {
+      "id": "decide-next",
+      "intent": "Choisir la prochaine action outillée",
+      "input": "résumé + contexte",
+      "output": "nextAction"
+    }
+  ]
+}

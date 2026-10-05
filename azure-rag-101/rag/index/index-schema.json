@@ -1,0 +1,11 @@
+{
+  "name": "docs-index",
+  "provider": "azure-ai-search",
+  "fields": [
+    { "name": "id", "type": "Edm.String", "key": true, "searchable": false, "retrievable": true },
+    { "name": "title", "type": "Edm.String", "searchable": true, "retrievable": true },
+    { "name": "content", "type": "Edm.String", "searchable": true, "retrievable": true },
+    { "name": "source", "type": "Edm.String", "searchable": false, "retrievable": true, "filterable": true }
+  ],
+  "topK": 3
+}

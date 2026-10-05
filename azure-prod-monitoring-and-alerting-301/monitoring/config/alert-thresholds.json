@@ -1,0 +1,16 @@
+{
+  "slo": {
+    "p95LatencyMs": 1200,
+    "errorRatePct": 1.0
+  },
+  "signals": [
+    "latency",
+    "errors",
+    "tokens"
+  ],
+  "actions": {
+    "latency": "Réduire la taille du prompt et activer le caching",
+    "errors": "Vérifier les quotas et réessayer avec backoff",
+    "tokens": "Appliquer un budget et tronquer les entrées"
+  }
+}

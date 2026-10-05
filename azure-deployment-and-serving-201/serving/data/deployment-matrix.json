@@ -1,0 +1,14 @@
+{
+  "options": [
+    {
+      "name": "baseline",
+      "latencyMs": 800,
+      "cost": "medium"
+    },
+    {
+      "name": "premium",
+      "latencyMs": 450,
+      "cost": "high"
+    }
+  ]
+}

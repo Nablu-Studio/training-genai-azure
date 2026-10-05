@@ -1,0 +1,19 @@
+{
+  "documents": [
+    {
+      "id": "doc-001",
+      "title": "Index Azure AI Search",
+      "text": "L’index doit conserver les métadonnées, les timestamps et les sources."
+    },
+    {
+      "id": "doc-002",
+      "title": "Politique de fraîcheur",
+      "text": "La fraîcheur doit être mesurée et pilotée par des seuils et des alertes."
+    },
+    {
+      "id": "doc-003",
+      "title": "Reranking",
+      "text": "Le reranking réordonne les passages afin d’améliorer la pertinence."
+    }
+  ]
+}

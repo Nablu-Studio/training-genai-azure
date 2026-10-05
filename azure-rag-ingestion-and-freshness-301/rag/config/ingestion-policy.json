@@ -1,0 +1,10 @@
+{
+  "policyId": "azure-ingestion-policy-001",
+  "maxAgeHours": 24,
+  "syncFrequencyHours": 6,
+  "requiredMetadata": [
+    "source",
+    "updatedAt"
+  ],
+  "output": "rag/freshness-report.json"
+}

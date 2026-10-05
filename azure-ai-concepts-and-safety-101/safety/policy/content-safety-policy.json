@@ -1,0 +1,30 @@
+{
+  "provider": "azure",
+  "comment": "Seuil = sévérité Content Safety (0, 2, 4, 6) à partir de laquelle l'action s'applique.",
+  "categories": {
+    "Hate": {
+      "blockAtSeverity": 2,
+      "action": "block",
+      "owner": "responsable-conformite",
+      "proof": "audit-summary.json"
+    },
+    "SelfHarm": {
+      "blockAtSeverity": 2,
+      "action": "escalate_for_review",
+      "owner": "responsable-support",
+      "proof": "audit-summary.json"
+    },
+    "Sexual": {
+      "blockAtSeverity": 4,
+      "action": "block",
+      "owner": "responsable-conformite",
+      "proof": "audit-summary.json"
+    },
+    "Violence": {
+      "blockAtSeverity": 4,
+      "action": "escalate_for_review",
+      "owner": "responsable-securite",
+      "proof": "audit-summary.json"
+    }
+  }
+}

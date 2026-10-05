@@ -1,0 +1,10 @@
+{
+  "query": "Comment piloter la fraîcheur d’un index RAG ?",
+  "signals": [
+    "keywords",
+    "semantic"
+  ],
+  "topK": 3,
+  "rerankTopK": 3,
+  "output": "rag/search-report.json"
+}

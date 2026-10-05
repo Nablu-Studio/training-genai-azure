@@ -1,0 +1,14 @@
+{
+  "sources": [
+    {
+      "id": "source-001",
+      "source": "docs-internes",
+      "updatedAt": "2026-07-01T10:00:00Z"
+    },
+    {
+      "id": "source-002",
+      "source": "runbooks",
+      "updatedAt": "2026-06-20T09:00:00Z"
+    }
+  ]
+}

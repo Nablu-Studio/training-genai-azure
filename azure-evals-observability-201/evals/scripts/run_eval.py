@@ -32,17 +32,17 @@ def require_deployment() -> str:
     deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT")
     if not deployment:
         sys.exit(
-            "AZURE_OPENAI_DEPLOYMENT manquant. Donnez le nom du DEPLOIEMENT "
-            "(Azure AI Foundry > Deployments), pas celui du modele : ce sont "
-            "deux choses distinctes sur Azure OpenAI."
+            "AZURE_OPENAI_DEPLOYMENT missing. Specify the DEPLOYMENT name "
+            "(Azure AI Foundry > Deployments), not the model name: these are "
+            "two distinct concepts on Azure OpenAI."
         )
     return deployment
 
 
 EVALS_DIR = Path(__file__).resolve().parents[1]
 SYSTEM_PROMPT = (
-    "Tu reponds uniquement a partir du contexte fourni. "
-    "Si l'information est absente, dis que le contexte ne permet pas de repondre."
+    "Answer ONLY using the provided context. "
+    "If the information is missing, state that the context does not contain the answer."
 )
 
 
@@ -94,8 +94,8 @@ def main() -> None:
                 temperature=0,
             )
         except APIError as exc:
-            # Un echec d'appel est un resultat d'evaluation, pas une raison d'arreter le run.
-            # Fail closed : un cas sans reponse compte 0, sinon le score serait flatteur.
+            # An invocation failure is an evaluation result, not a reason to abort the run.
+            # Fail closed: missing model answers score 0 to prevent artificial inflation.
             results.append(
                 {"id": case["id"], "kind": case["kind"], "passed": False, "score": 0.0, "error": str(exc)}
             )
@@ -106,7 +106,7 @@ def main() -> None:
         latencies.append(latency_ms)
         total_tokens += response.usage.total_tokens if response.usage else 0
 
-        # La trace suit exactement le schema versionne dans le workspace.
+        # Execution trace strictly adheres to the versioned schema in the workspace.
         trace = {
             "latencyMs": latency_ms,
             "deployment": deployment,

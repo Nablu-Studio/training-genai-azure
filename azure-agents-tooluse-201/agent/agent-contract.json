@@ -1,0 +1,5 @@
+{
+  "name": "ticket-agent",
+  "tool": "ticket_tool",
+  "output": "ticket"
+}

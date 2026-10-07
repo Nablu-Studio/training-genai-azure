@@ -15,9 +15,9 @@ def require_deployment() -> str:
     deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT")
     if not deployment:
         sys.exit(
-            "AZURE_OPENAI_DEPLOYMENT manquant. Donnez le nom du DEPLOIEMENT "
-            "(Azure AI Foundry > Deployments), pas celui du modele : ce sont "
-            "deux choses distinctes sur Azure OpenAI."
+            "AZURE_OPENAI_DEPLOYMENT missing. Specify the DEPLOYMENT name "
+            "(Azure AI Foundry > Deployments), not the model name: these are "
+            "two distinct concepts on Azure OpenAI."
         )
     return deployment
 
@@ -34,9 +34,9 @@ def main():
     )
 
     prompt = (
-        "Tu es un auditeur de policy runtime GenAI.\n"
+        "You are a GenAI runtime policy auditor.\n"
         f"Policy: {json.dumps(policy, ensure_ascii=False)}\n"
-        "Retourne une synthèse courte des risques et une action recommandée."
+        "Return a concise risk summary and recommended mitigation action."
     )
 
     response = client.chat.completions.create(

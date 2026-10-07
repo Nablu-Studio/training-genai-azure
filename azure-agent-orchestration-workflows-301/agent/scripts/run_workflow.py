@@ -15,9 +15,9 @@ def require_deployment() -> str:
     deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT")
     if not deployment:
         sys.exit(
-            "AZURE_OPENAI_DEPLOYMENT manquant. Donnez le nom du DEPLOIEMENT "
-            "(Azure AI Foundry > Deployments), pas celui du modele : ce sont "
-            "deux choses distinctes sur Azure OpenAI."
+            "AZURE_OPENAI_DEPLOYMENT missing. Specify the DEPLOYMENT name "
+            "(Azure AI Foundry > Deployments), not the model name: these are "
+            "two distinct concepts on Azure OpenAI."
         )
     return deployment
 
@@ -36,10 +36,10 @@ def main():
     steps_report = []
     for step in plan.get("steps", []):
         prompt = (
-            "Tu exécutes une étape d’un workflow d’agent.\n"
+            "You are executing a step in an agent workflow.\n"
             f"Étape: {json.dumps(step, ensure_ascii=False)}\n"
             f"Objectif: {plan.get('goal')}\n"
-            "Produit une sortie courte."
+            "Produce a concise output."
         )
         response = client.chat.completions.create(
             model=require_deployment(),

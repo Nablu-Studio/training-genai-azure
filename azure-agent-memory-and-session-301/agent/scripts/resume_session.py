@@ -15,9 +15,9 @@ def require_deployment() -> str:
     deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT")
     if not deployment:
         sys.exit(
-            "AZURE_OPENAI_DEPLOYMENT manquant. Donnez le nom du DEPLOIEMENT "
-            "(Azure AI Foundry > Deployments), pas celui du modele : ce sont "
-            "deux choses distinctes sur Azure OpenAI."
+            "AZURE_OPENAI_DEPLOYMENT missing. Specify the DEPLOYMENT name "
+            "(Azure AI Foundry > Deployments), not the model name: these are "
+            "two distinct concepts on Azure OpenAI."
         )
     return deployment
 
@@ -34,7 +34,7 @@ def main():
     )
 
     prompt = (
-        "Tu es un agent. Reprends la session et propose une prochaine action.\n"
+        "You are an AI agent. Resume the session and recommend the next action.\n"
         f"Etat de session: {json.dumps(state, ensure_ascii=False)}\n"
         "Réponds en une courte synthèse, puis une prochaine action."
     )

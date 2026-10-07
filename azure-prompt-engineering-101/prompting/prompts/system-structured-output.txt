@@ -1,0 +1,1 @@
+Reponds dans un JSON {"answer": string, "confidence": number}.

@@ -35,9 +35,9 @@ def require_deployment() -> str:
     deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT")
     if not deployment:
         sys.exit(
-            "AZURE_OPENAI_DEPLOYMENT manquant. Donnez le nom du DEPLOIEMENT "
-            "(Azure AI Foundry > Deployments), pas celui du modele : ce sont "
-            "deux choses distinctes sur Azure OpenAI."
+            "AZURE_OPENAI_DEPLOYMENT missing. Specify the DEPLOYMENT name "
+            "(Azure AI Foundry > Deployments), not the model name: these are "
+            "two distinct concepts on Azure OpenAI."
         )
     return deployment
 
@@ -45,8 +45,8 @@ def require_deployment() -> str:
 RAG_DIR = Path(__file__).resolve().parents[1]
 DEFAULT_QUESTION = "Qu'est-ce qui determine la fraicheur des reponses d'un RAG ?"
 SYSTEM_PROMPT = (
-    "Tu réponds uniquement à partir des passages fournis, en citant leurs identifiants. "
-    "Si les passages ne contiennent pas la réponse, dis-le explicitement."
+    "Answer ONLY using the provided passages, citing their identifiers. "
+    "If the passages do not contain the answer, state so explicitly."
 )
 
 
@@ -66,7 +66,7 @@ def main() -> None:
     if not all([search_endpoint, search_key, openai_endpoint, openai_key]):
         sys.exit(
             "Definissez AZURE_SEARCH_ENDPOINT, AZURE_SEARCH_API_KEY, "
-            "AZURE_OPENAI_ENDPOINT et AZURE_OPENAI_API_KEY avant de lancer le lab."
+            "Set AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_API_KEY before running this lab."
         )
 
     schema = json.loads((RAG_DIR / "index/index-schema.json").read_text(encoding="utf-8"))
@@ -80,19 +80,19 @@ def main() -> None:
     try:
         selected = search(search_client, question, schema["topK"])
         if not selected:
-            # Index vide : on verse le corpus puis on laisse l'indexation se faire.
+            # Empty index: upload corpus documents then wait for ingestion to complete.
             print("Index vide, envoi du corpus d'exemple...", file=sys.stderr)
             docs = json.loads((RAG_DIR / "data/sample-docs.json").read_text(encoding="utf-8"))
             search_client.upload_documents(documents=docs)
             time.sleep(3)
             selected = search(search_client, question, schema["topK"])
     except ResourceNotFoundError:
-        sys.exit(f"Index « {os.getenv('AZURE_SEARCH_INDEX', schema['name'])} » introuvable : créez-le avant de lancer le lab.")
+        sys.exit(f"Index '{os.getenv('AZURE_SEARCH_INDEX', schema['name'])}' not found: create it before running this lab.")
     except HttpResponseError as exc:
-        sys.exit(f"Azure AI Search a refusé la requête : {exc.message}")
+        sys.exit(f"Azure AI Search rejected the request: {exc.message}")
 
     if not selected:
-        sys.exit("Aucun passage retourné : l'indexation n'est peut-être pas terminée, réessayez dans quelques secondes.")
+        sys.exit("No passages returned: index ingestion may still be processing, retry in a few seconds.")
 
     context = "\n\n".join(f"[{doc['id']}] {doc['content']}" for doc in selected)
     client = AzureOpenAI(azure_endpoint=openai_endpoint, api_key=openai_key, api_version="2024-10-21")

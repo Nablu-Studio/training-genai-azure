@@ -1,0 +1,5 @@
+{
+  "topK": 4,
+  "citationRequired": true,
+  "freshness": "7d"
+}

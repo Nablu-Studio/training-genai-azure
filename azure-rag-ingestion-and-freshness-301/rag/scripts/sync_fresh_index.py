@@ -18,9 +18,9 @@ def require_deployment() -> str:
     deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT")
     if not deployment:
         sys.exit(
-            "AZURE_OPENAI_DEPLOYMENT manquant. Donnez le nom du DEPLOIEMENT "
-            "(Azure AI Foundry > Deployments), pas celui du modele : ce sont "
-            "deux choses distinctes sur Azure OpenAI."
+            "AZURE_OPENAI_DEPLOYMENT missing. Specify the DEPLOYMENT name "
+            "(Azure AI Foundry > Deployments), not the model name: these are "
+            "two distinct concepts on Azure OpenAI."
         )
     return deployment
 
@@ -65,10 +65,10 @@ def main():
         )
 
     prompt = (
-        "Tu es un assistant d’exploitation RAG.\n"
+        "You are a RAG operations assistant.\n"
         f"Politique: {json.dumps(policy, ensure_ascii=False)}\n"
         f"Statuts: {json.dumps(statuses, ensure_ascii=False)}\n"
-        "Propose une action de synchronisation prioritaire."
+        "Recommend a high-priority index synchronization action."
     )
 
     response = client.chat.completions.create(

@@ -17,9 +17,9 @@ def require_deployment() -> str:
     deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT")
     if not deployment:
         sys.exit(
-            "AZURE_OPENAI_DEPLOYMENT manquant. Donnez le nom du DEPLOIEMENT "
-            "(Azure AI Foundry > Deployments), pas celui du modele : ce sont "
-            "deux choses distinctes sur Azure OpenAI."
+            "AZURE_OPENAI_DEPLOYMENT missing. Specify the DEPLOYMENT name "
+            "(Azure AI Foundry > Deployments), not the model name: these are "
+            "two distinct concepts on Azure OpenAI."
         )
     return deployment
 
@@ -43,10 +43,10 @@ def main():
     )
 
     prompt = (
-        "Tu dois reranker des documents pour une recherche hybride.\n"
+        "Rerank candidate documents for hybrid search retrieval.\n"
         f"Requête: {plan.get('query')}\n"
         f"Documents: {json.dumps(corpus.get('documents', []), ensure_ascii=False)}\n"
-        "Retourne une liste ordonnée des ids, du plus pertinent au moins pertinent."
+        "Return an ordered list of document IDs from most relevant to least relevant."
     )
 
     response = client.chat.completions.create(

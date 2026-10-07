@@ -68,7 +68,7 @@ def main() -> None:
     severities = {item.category: item.severity for item in analysis.categories_analysis}
     verdict, triggered = decide(severities, policy)
     audit = {
-        # Empreinte plutôt que prompt en clair : l'audit ne doit pas devenir une fuite.
+        # Hash fingerprint rather than cleartext prompt: audit must not leak sensitive data.
         "promptHash": hashlib.sha256(prompt.encode("utf-8")).hexdigest()[:12],
         "promptLength": len(prompt),
         "provider": "azure",

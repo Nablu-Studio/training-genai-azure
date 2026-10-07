@@ -15,9 +15,9 @@ def require_deployment() -> str:
     deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT")
     if not deployment:
         sys.exit(
-            "AZURE_OPENAI_DEPLOYMENT manquant. Donnez le nom du DEPLOIEMENT "
-            "(Azure AI Foundry > Deployments), pas celui du modele : ce sont "
-            "deux choses distinctes sur Azure OpenAI."
+            "AZURE_OPENAI_DEPLOYMENT missing. Specify the DEPLOYMENT name "
+            "(Azure AI Foundry > Deployments), not the model name: these are "
+            "two distinct concepts on Azure OpenAI."
         )
     return deployment
 
@@ -34,9 +34,9 @@ def main():
     )
 
     prompt = (
-        "Tu es un assistant SRE. À partir de seuils, propose un état de santé.\n"
+        "You are an SRE assistant. Given threshold metrics, determine system health status.\n"
         f"Seuils: {json.dumps(thresholds, ensure_ascii=False)}\n"
-        "Retourne une synthèse courte et une action recommandée."
+        "Return a concise health summary and recommended action."
     )
 
     response = client.chat.completions.create(

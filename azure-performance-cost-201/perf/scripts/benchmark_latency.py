@@ -20,11 +20,11 @@ from pathlib import Path
 from openai import APIError, AzureOpenAI, RateLimitError
 
 PERF_DIR = Path(__file__).resolve().parents[1]
-CHARS_PER_TOKEN = 4  # approximation suffisante pour calibrer la taille du prompt
+CHARS_PER_TOKEN = 4  # heuristic approximation to estimate prompt token length
 
 
 def percentile(values: list[float], pct: float) -> float | None:
-    """Percentile par rang le plus proche : pas d'interpolation, lisible."""
+    """Nearest-rank percentile: discrete non-interpolated latency measurement."""
     if not values:
         return None
     ordered = sorted(values)
@@ -58,7 +58,7 @@ def bench_deployment(client: AzureOpenAI, deployment: str, profile: dict, reques
                 prompt_tokens.append(response.usage.prompt_tokens)
                 completion_tokens.append(response.usage.completion_tokens)
         except RateLimitError:
-            # Un 429 est un signal de capacite, pas un bug : on le compte a part.
+            # HTTP 429 is a capacity signal rather than a code error: track it separately.
             throttled += 1
         except APIError as exc:
             errors += 1
